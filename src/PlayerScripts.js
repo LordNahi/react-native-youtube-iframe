@@ -83,6 +83,8 @@ export const MAIN_SCRIPT = (
   initialPlayerParams,
   allowWebViewZoom,
   contentScale,
+  playerWidth,
+  playerHeight,
 ) => {
   const {
     end,
@@ -154,31 +156,23 @@ export const MAIN_SCRIPT = (
   <head>
     <meta
       name="viewport"
-      content="width=device-width, ${scale}"
+      content="width=device-width, height=device-height, ${scale}"
     >
     <style>
       body {
         margin: 0;
       }
-      .container {
-        position: relative;
-        width: 100%;
-        height: 0;
-        padding-bottom: 56.25%;
-      }
       .video {
+          left: -${Math.floor(playerWidth * 0.08)}px;
+          top: -${Math.floor(playerHeight * 0.08)}px;
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          width: 116%;
+          height: 116%;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="video" id="player" />
-    </div>
+    <div class="video" id="player" />
 
     <script>
       var tag = document.createElement('script');
@@ -190,8 +184,8 @@ export const MAIN_SCRIPT = (
       var player;
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-          width: '1000',
-          height: '1000',
+          width: '${playerWidth}',
+          height: '${playerHeight}',
           videoId: '${videoId_s}',
           playerVars: {
             ${listParam}

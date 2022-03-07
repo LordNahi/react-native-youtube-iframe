@@ -231,6 +231,8 @@ const YoutubeIframe = (props, ref) => {
       initialPlayerParamsRef.current,
       allowWebViewZoom,
       contentScale,
+      width,
+      height,
     );
 
     if (useLocalHTML) {
@@ -245,7 +247,14 @@ const YoutubeIframe = (props, ref) => {
     const data = ytScript.urlEncodedJSON;
 
     return {uri: base + '?data=' + data};
-  }, [useLocalHTML, contentScale, baseUrlOverride, allowWebViewZoom]);
+  }, [
+    useLocalHTML,
+    contentScale,
+    baseUrlOverride,
+    allowWebViewZoom,
+    width,
+    height,
+  ]);
 
   return (
     <View style={{height, width}}>
