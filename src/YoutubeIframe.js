@@ -166,6 +166,7 @@ const YoutubeIframe = (props, ref) => {
     );
 
     return () => {
+      console.log('shutdown!!!!', webref.shutdown);
       webref.shutdown();
     };
   }, [playList, play, playListStartIndex, playerReady]);
