@@ -146,6 +146,8 @@ const YoutubeIframe = (props, ref) => {
   }, [videoId, play, playerReady]);
 
   useEffect(() => {
+    console.log('fuck?', webViewRef);
+
     const webref = webViewRef.current;
 
     if (!playerReady) {
