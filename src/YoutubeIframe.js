@@ -146,6 +146,8 @@ const YoutubeIframe = (props, ref) => {
   }, [videoId, play, playerReady]);
 
   useEffect(() => {
+    const webref = webViewRef.current;
+
     if (!playerReady) {
       // no instance of player is ready
       return;
@@ -159,9 +161,13 @@ const YoutubeIframe = (props, ref) => {
 
     lastPlayListRef.current = playList;
 
-    webViewRef.current.injectJavaScript(
+    webref.injectJavaScript(
       PLAYER_FUNCTIONS.loadPlaylist(playList, playListStartIndex, play),
     );
+
+    return () => {
+      webref.shutdown();
+    };
   }, [playList, play, playListStartIndex, playerReady]);
 
   const onWebMessage = useCallback(
