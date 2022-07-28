@@ -207,53 +207,43 @@ export const MAIN_SCRIPT = (
             cc_load_policy: ${showClosedCaptions_s},
           }
         });
+      }
 
-        window.addEventListener("message", message => {
-          alert("Message received);
+      window.addEventListener("message", message => {
+        alert("Message received);
 
-          switch (message.data) {
-            case "setup":
-              setup();
-              break;
-            case "shutdown":
-              shutdown();
-              break;
-            default:
-              alert('Unknown message type: ' + message.data);
-          }
-        });
-
-        function setup() {
-          alert("Setting up Youtube DOM")
-
-          shutdown();
-
-          document.addEventListener('fullscreenchange', onFullScreenChange);
-          document.addEventListener('mozfullscreenchange', onFullScreenChange);
-          document.addEventListener('msfullscreenchange', onFullScreenChange);
-          document.addEventListener('webkitfullscreenchange', onFullScreenChange);
-
-          player.addEventListener('onReady', onPlayerReady);
-          player.addEventListener('onStateChange', onPlayerStateChange);
-          player.addEventListener('onError', onPlayerError);
-          player.addEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
-          player.addEventListener('onPlaybackRateChange', onPlaybackRateChange);
+        switch (message.data) {
+          case "setup":
+            setup();
+            break;
+          case "shutdown":
+            shutdown();
+            break;
+          default:
+            alert('Unknown message type: ' + message.data);
         }
+      });
 
-        function shutdown() {
-          alert("Shutting down up Youtube DOM")
-  
-          document.removeEventListener('fullscreenchange', onFullScreenChange);
-          document.removeEventListener('mozfullscreenchange', onFullScreenChange);
-          document.removeEventListener('msfullscreenchange', onFullScreenChange);
-          document.removeEventListener('webkitfullscreenchange', onFullScreenChange);
-  
-          player.removeEventListener('onReady', onPlayerReady);
-          player.removeEventListener('onStateChange', onPlayerStateChange);
-          player.removeEventListener('onError', onPlayerError);
-          player.removeEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
-          player.removeEventListener('onPlaybackRateChange', onPlaybackRateChange);
-        }
+      function setup() {
+        alert("Setting up Youtube DOM")
+
+        shutdown();
+
+        player.addEventListener('onReady', onPlayerReady);
+        player.addEventListener('onStateChange', onPlayerStateChange);
+        player.addEventListener('onError', onPlayerError);
+        player.addEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
+        player.addEventListener('onPlaybackRateChange', onPlaybackRateChange);
+      }
+
+      function shutdown() {
+        alert("Shutting down up Youtube DOM")
+
+        player.removeEventListener('onReady', onPlayerReady);
+        player.removeEventListener('onStateChange', onPlayerStateChange);
+        player.removeEventListener('onError', onPlayerError);
+        player.removeEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
+        player.removeEventListener('onPlaybackRateChange', onPlaybackRateChange);
       }
 
       function onPlayerError(event) {
