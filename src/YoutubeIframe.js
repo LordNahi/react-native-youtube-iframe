@@ -49,6 +49,7 @@ const YoutubeIframe = (props, ref) => {
     onFullScreenChange = _status => {},
     onPlaybackQualityChange = _quality => {},
     onPlaybackRateChange = _playbackRate => {},
+    isOnScreen = false,
   } = props;
 
   const [playerReady, setPlayerReady] = useState(false);
@@ -118,6 +119,19 @@ const YoutubeIframe = (props, ref) => {
   );
 
   useEffect(() => {
+    const currentWebViewRef = webViewRef.current;
+    if (isOnScreen) {
+      currentWebViewRef.postMessage('setup');
+    } else {
+      currentWebViewRef.postMessage('shutdown');
+    }
+
+    return () => {
+      currentWebViewRef.postMessage('shutdown');
+    };
+  }, [isOnScreen]);
+
+  useEffect(() => {
     if (!playerReady) {
       // no instance of player is ready
       return;
@@ -146,8 +160,6 @@ const YoutubeIframe = (props, ref) => {
   }, [videoId, play, playerReady]);
 
   useEffect(() => {
-    console.log('fuck?', webViewRef);
-
     const webref = webViewRef.current;
 
     if (!playerReady) {
@@ -168,7 +180,6 @@ const YoutubeIframe = (props, ref) => {
     );
 
     return () => {
-      console.log('shutdown!!!!', webref.shutdown);
       webref.shutdown();
     };
   }, [playList, play, playListStartIndex, playerReady]);

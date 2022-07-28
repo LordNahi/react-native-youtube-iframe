@@ -208,8 +208,37 @@ export const MAIN_SCRIPT = (
           }
         });
 
+        window.addEventListener("message", message => {
+          alert("Message received);
+
+          switch (message.data) {
+            case "shutdown":
+              
+              break;
+            default:
+              alert('Unknown message type: ' + message.data);
+          }
+        });
+
+        function setup() {
+          alert("Setting up Youtube DOM")
+
+          shutdown();
+
+          document.addEventListener('fullscreenchange', onFullScreenChange);
+          document.addEventListener('mozfullscreenchange', onFullScreenChange);
+          document.addEventListener('msfullscreenchange', onFullScreenChange);
+          document.addEventListener('webkitfullscreenchange', onFullScreenChange);
+
+          player.addEventListener('onReady', onPlayerReady);
+          player.addEventListener('onStateChange', onPlayerStateChange);
+          player.addEventListener('onError', onPlayerError);
+          player.addEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
+          player.addEventListener('onPlaybackRateChange', onPlaybackRateChange);
+        }
+
         function shutdown() {
-          console.log("Shutting down up Youtube DOM");
+          alert("Shutting down up Youtube DOM")
   
           document.removeEventListener('fullscreenchange', onFullScreenChange);
           document.removeEventListener('mozfullscreenchange', onFullScreenChange);
@@ -222,23 +251,6 @@ export const MAIN_SCRIPT = (
           player.removeEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
           player.removeEventListener('onPlaybackRateChange', onPlaybackRateChange);
         }
-  
-        function setup() {
-          console.log("Setting up Youtube DOM");
-  
-          player.addEventListener('onReady', onPlayerReady);
-          player.addEventListener('onStateChange', onPlayerStateChange);
-          player.addEventListener('onError', onPlayerError);
-          player.addEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
-          player.addEventListener('onPlaybackRateChange', onPlaybackRateChange);
-  
-          document.addEventListener('fullscreenchange', onFullScreenChange);
-          document.addEventListener('mozfullscreenchange', onFullScreenChange);
-          document.addEventListener('msfullscreenchange', onFullScreenChange);
-          document.addEventListener('webkitfullscreenchange', onFullScreenChange);
-        }
-  
-        setup();
       }
 
       function onPlayerError(event) {
