@@ -124,14 +124,7 @@ const YoutubeIframe = (props, ref) => {
     if (isOnScreen) {
       console.log('trying to setup');
       currentWebViewRef.postMessage('setup');
-    } else {
-      console.log('trying to shutdown');
-      currentWebViewRef.postMessage('shutdown');
     }
-
-    return () => {
-      currentWebViewRef.postMessage('shutdown');
-    };
   }, [isOnScreen]);
 
   useEffect(() => {
