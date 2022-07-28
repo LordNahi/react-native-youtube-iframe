@@ -207,42 +207,44 @@ export const MAIN_SCRIPT = (
             cc_load_policy: ${showClosedCaptions_s},
           }
         });
-      }
 
-      window.addEventListener("message", message => {
-        alert("Message received);
-
-        switch (message.data) {
-          case "setup":
-            setup();
-            break;
-          case "shutdown":
-            shutdown();
-            break;
-          default:
-            alert('Unknown message type: ' + message.data);
+        function setup() {
+          alert("Setting up Youtube DOM")
+  
+          player.addEventListener('onReady', onPlayerReady);
+          player.addEventListener('onStateChange', onPlayerStateChange);
+          player.addEventListener('onError', onPlayerError);
+          player.addEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
+          player.addEventListener('onPlaybackRateChange', onPlaybackRateChange);
         }
-      });
-
-      function setup() {
-        alert("Setting up Youtube DOM")
-
-        player.addEventListener('onReady', onPlayerReady);
-        player.addEventListener('onStateChange', onPlayerStateChange);
-        player.addEventListener('onError', onPlayerError);
-        player.addEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
-        player.addEventListener('onPlaybackRateChange', onPlaybackRateChange);
+  
+        function shutdown() {
+          // alert("Shutting down up Youtube DOM")
+  
+          // player.removeEventListener('onReady', onPlayerReady);
+          // player.removeEventListener('onStateChange', onPlayerStateChange);
+          // player.removeEventListener('onError', onPlayerError);
+          // player.removeEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
+          // player.removeEventListener('onPlaybackRateChange', onPlaybackRateChange);
+        }
+  
+        window.addEventListener("message", message => {
+          alert("Message received);
+  
+          switch (message.data) {
+            case "setup":
+              setup();
+              break;
+            case "shutdown":
+              shutdown();
+              break;
+            default:
+              alert('Unknown message type: ' + message.data);
+          }
+        });
       }
 
-      function shutdown() {
-        // alert("Shutting down up Youtube DOM")
 
-        // player.removeEventListener('onReady', onPlayerReady);
-        // player.removeEventListener('onStateChange', onPlayerStateChange);
-        // player.removeEventListener('onError', onPlayerError);
-        // player.removeEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
-        // player.removeEventListener('onPlaybackRateChange', onPlaybackRateChange);
-      }
 
       function onPlayerError(event) {
         window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'playerError', data: event.data}))
