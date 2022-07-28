@@ -227,8 +227,6 @@ export const MAIN_SCRIPT = (
       function setup() {
         alert("Setting up Youtube DOM")
 
-        shutdown();
-
         player.addEventListener('onReady', onPlayerReady);
         player.addEventListener('onStateChange', onPlayerStateChange);
         player.addEventListener('onError', onPlayerError);
@@ -237,13 +235,13 @@ export const MAIN_SCRIPT = (
       }
 
       function shutdown() {
-        alert("Shutting down up Youtube DOM")
+        // alert("Shutting down up Youtube DOM")
 
-        player.removeEventListener('onReady', onPlayerReady);
-        player.removeEventListener('onStateChange', onPlayerStateChange);
-        player.removeEventListener('onError', onPlayerError);
-        player.removeEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
-        player.removeEventListener('onPlaybackRateChange', onPlaybackRateChange);
+        // player.removeEventListener('onReady', onPlayerReady);
+        // player.removeEventListener('onStateChange', onPlayerStateChange);
+        // player.removeEventListener('onError', onPlayerError);
+        // player.removeEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
+        // player.removeEventListener('onPlaybackRateChange', onPlaybackRateChange);
       }
 
       function onPlayerError(event) {
