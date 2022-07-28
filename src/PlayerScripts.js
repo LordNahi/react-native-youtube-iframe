@@ -212,8 +212,11 @@ export const MAIN_SCRIPT = (
           alert("Message received);
 
           switch (message.data) {
+            case "setup":
+              setup();
+              break;
             case "shutdown":
-              
+              shutdown();
               break;
             default:
               alert('Unknown message type: ' + message.data);
