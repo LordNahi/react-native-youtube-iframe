@@ -58,6 +58,10 @@ export interface YoutubeIframeProps {
    */
   width?: number;
   /**
+   * Whether the video is on screen, currently being used to control adding/removing events
+   */
+  isOnScreen?: boolean;
+  /**
    * Specifies the YouTube Video ID of the video to be played.
    */
   videoId?: string;
