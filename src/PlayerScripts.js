@@ -73,6 +73,7 @@ true;
     player.addEventListener('onError', onPlayerError);
     player.addEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
     player.addEventListener('onPlaybackRateChange', onPlaybackRateChange);
+    console.log("Setup");
     true;
     `;
   },
@@ -87,6 +88,7 @@ true;
       onPlaybackQualityChange,
     );
     player.removeEventListener('onPlaybackRateChange', onPlaybackRateChange);
+    console.log("Shutdown");
     true;
     `;
   },
@@ -249,7 +251,6 @@ export const MAIN_SCRIPT = (
         window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'playerReady'}))
       }
 
-      var done = false;
       function onPlayerStateChange(event) {
         window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'playerStateChange', data: event.data}))
       }
