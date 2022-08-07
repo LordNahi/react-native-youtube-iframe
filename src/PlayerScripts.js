@@ -191,7 +191,6 @@ export const MAIN_SCRIPT = (
             ${listParam}
             ${listTypeParam}
             ${playlistParam}
-
             end: ${end},
             rel: ${rel_s},
             playsinline: 1,
@@ -219,13 +218,13 @@ export const MAIN_SCRIPT = (
         }
   
         function shutdown() {
-          // alert("Shutting down up Youtube DOM")
+          alert("Shutting down up Youtube DOM")
   
-          // player.removeEventListener('onReady', onPlayerReady);
-          // player.removeEventListener('onStateChange', onPlayerStateChange);
-          // player.removeEventListener('onError', onPlayerError);
-          // player.removeEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
-          // player.removeEventListener('onPlaybackRateChange', onPlaybackRateChange);
+          player.removeEventListener('onReady', onPlayerReady);
+          player.removeEventListener('onStateChange', onPlayerStateChange);
+          player.removeEventListener('onError', onPlayerError);
+          player.removeEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
+          player.removeEventListener('onPlaybackRateChange', onPlaybackRateChange);
         }
   
         window.addEventListener("message", message => {
@@ -243,8 +242,6 @@ export const MAIN_SCRIPT = (
           }
         });
       }
-
-
 
       function onPlayerError(event) {
         window.ReactNativeWebView.postMessage(JSON.stringify({eventType: 'playerError', data: event.data}))
