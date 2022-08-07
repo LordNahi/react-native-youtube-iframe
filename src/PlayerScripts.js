@@ -68,8 +68,6 @@ true;
 
   setup: () => {
     return `
-    alert("Setting up Youtube DOM")
-
     player.addEventListener('onReady', onPlayerReady);
     player.addEventListener('onStateChange', onPlayerStateChange);
     player.addEventListener('onError', onPlayerError);
@@ -81,8 +79,6 @@ true;
 
   shutdown: () => {
     return `
-    alert('Shutting down up Youtube DOM');
-
     player.removeEventListener('onReady', onPlayerReady);
     player.removeEventListener('onStateChange', onPlayerStateChange);
     player.removeEventListener('onError', onPlayerError);
