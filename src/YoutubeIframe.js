@@ -119,11 +119,10 @@ const YoutubeIframe = (props, ref) => {
   );
 
   useEffect(() => {
-    const currentWebViewRef = webViewRef.current;
-
     if (isOnScreen) {
-      console.log('trying to setup');
-      currentWebViewRef.postMessage('setup');
+      webViewRef.current.injectJavaScript(PLAYER_FUNCTIONS.setup());
+    } else {
+      webViewRef.current.injectJavaScript(PLAYER_FUNCTIONS.shutdown());
     }
   }, [isOnScreen]);
 

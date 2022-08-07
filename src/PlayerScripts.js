@@ -65,6 +65,35 @@ true;
 
     return `player.${func}({videoId: ${JSON.stringify(videoId)}}); true;`;
   },
+
+  setup: () => {
+    return `
+    alert("Setting up Youtube DOM")
+
+    player.addEventListener('onReady', onPlayerReady);
+    player.addEventListener('onStateChange', onPlayerStateChange);
+    player.addEventListener('onError', onPlayerError);
+    player.addEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
+    player.addEventListener('onPlaybackRateChange', onPlaybackRateChange);
+    true;
+    `;
+  },
+
+  shutdown: () => {
+    return `
+    alert('Shutting down up Youtube DOM');
+
+    player.removeEventListener('onReady', onPlayerReady);
+    player.removeEventListener('onStateChange', onPlayerStateChange);
+    player.removeEventListener('onError', onPlayerError);
+    player.removeEventListener(
+      'onPlaybackQualityChange',
+      onPlaybackQualityChange,
+    );
+    player.removeEventListener('onPlaybackRateChange', onPlaybackRateChange);
+    true;
+    `;
+  },
 };
 
 export const playMode = {
@@ -204,41 +233,6 @@ export const MAIN_SCRIPT = (
             iv_load_policy: ${iv_load_policy},
             modestbranding: ${modestbranding_s},
             cc_load_policy: ${showClosedCaptions_s},
-          }
-        });
-
-        function setup() {
-          alert("Setting up Youtube DOM")
-  
-          player.addEventListener('onReady', onPlayerReady);
-          player.addEventListener('onStateChange', onPlayerStateChange);
-          player.addEventListener('onError', onPlayerError);
-          player.addEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
-          player.addEventListener('onPlaybackRateChange', onPlaybackRateChange);
-        }
-  
-        function shutdown() {
-          alert("Shutting down up Youtube DOM")
-  
-          player.removeEventListener('onReady', onPlayerReady);
-          player.removeEventListener('onStateChange', onPlayerStateChange);
-          player.removeEventListener('onError', onPlayerError);
-          player.removeEventListener('onPlaybackQualityChange', onPlaybackQualityChange);
-          player.removeEventListener('onPlaybackRateChange', onPlaybackRateChange);
-        }
-  
-        window.addEventListener("message", message => {
-          alert("Message received);
-  
-          switch (message.data) {
-            case "setup":
-              setup();
-              break;
-            case "shutdown":
-              shutdown();
-              break;
-            default:
-              alert('Unknown message type: ' + message.data);
           }
         });
       }
