@@ -119,12 +119,8 @@ const YoutubeIframe = (props, ref) => {
   );
 
   useEffect(() => {
-    if (isOnScreen) {
-      webViewRef.current.injectJavaScript(PLAYER_FUNCTIONS.setup());
-    } else {
-      webViewRef.current.injectJavaScript(PLAYER_FUNCTIONS.shutdown());
-    }
-  }, [isOnScreen]);
+    return webViewRef.current.injectJavaScript(PLAYER_FUNCTIONS.shutdown());
+  }, []);
 
   useEffect(() => {
     if (!playerReady) {

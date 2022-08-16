@@ -233,6 +233,8 @@ export const MAIN_SCRIPT = (
             cc_load_policy: ${showClosedCaptions_s},
           }
         });
+
+        ${PLAYER_FUNCTIONS.setup()}
       }
 
       function onPlayerError(event) {
