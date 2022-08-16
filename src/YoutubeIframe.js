@@ -294,6 +294,7 @@ const YoutubeIframe = (props, ref) => {
         source={source}
         ref={webViewRef}
         onMessage={onWebMessage}
+        useWebkit={true}
       />
     </View>
   );
